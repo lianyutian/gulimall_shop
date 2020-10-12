@@ -17,32 +17,21 @@ public class User {
     /**
      * 用户ID
      */
-    private Long userId;
+    //private Long userId;
     /**
      * 用户名
      */
-    private String userName;
+    public String userName;
     /**
      * 手机号
      */
-    private String mobile;
+    //private String mobile;
     /**
      * 密码
      */
-    private String passWord;
+    public String passWord;
     /**
      * 创建时间
      */
-    private Date createTime;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", mobile='" + mobile + '\'' +
-                ", passWord='" + passWord + '\'' +
-                ", createTime=" + createTime +
-                '}';
-    }
+    //private Date createTime;
 }

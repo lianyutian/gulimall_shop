@@ -3,6 +3,7 @@ package com.atguigu.gulimall.shop.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.atguigu.gulimall.shop.model.User;
 import com.atguigu.gulimall.shop.service.LoginService;
+import com.atguigu.gulimall.shop.utils.DataResult;
 import com.atguigu.gulimall.shop.utils.JWTUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,9 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping("/userlogin")
-    public Object loing(@RequestBody User user) {
-        User lala = loginService.login(user);
-        lala.getUserName();
+    public DataResult loing(@RequestBody User user) {
+        //User user = JSONObject.parseObject(params, User.class);
+        //return DataResult.success(loginService.login(user));
         return null;
     }
 
