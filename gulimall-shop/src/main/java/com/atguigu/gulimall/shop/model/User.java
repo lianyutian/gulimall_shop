@@ -30,8 +30,14 @@ public class User {
      * 密码
      */
     public String passWord;
+
     /**
      * 创建时间
      */
-    //private Date createTime;
+    private Date createTime;
+
+    /**
+     * token
+     */
+    private String token;
 }

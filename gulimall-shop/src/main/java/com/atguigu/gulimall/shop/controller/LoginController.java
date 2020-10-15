@@ -13,16 +13,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/login")
-@CrossOrigin
 public class LoginController {
     @Autowired
     private LoginService loginService;
 
     @PostMapping("/userlogin")
     public DataResult loing(@RequestBody User user) {
-        //User user = JSONObject.parseObject(params, User.class);
-        //return DataResult.success(loginService.login(user));
-        return null;
+        return DataResult.success(loginService.login(user));
     }
 
     @GetMapping("/user")

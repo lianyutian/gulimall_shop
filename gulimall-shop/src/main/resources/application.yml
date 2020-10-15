@@ -44,3 +44,11 @@ spring:
 # mybatis配置
 mybatis:
   mapper-locations: classpath*:/mapper/**/*.xml
+
+# JWT秘钥
+jwt:
+  secretKey: 78944878877848fg)
+  accessTokenExpireTime: PT2H
+  refreshTokenExpireTime: PT8H
+  refreshTokenExpireAppTime: P30D
+
