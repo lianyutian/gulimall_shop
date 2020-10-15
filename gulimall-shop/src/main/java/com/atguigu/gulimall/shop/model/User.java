@@ -17,11 +17,13 @@ public class User {
     /**
      * 用户ID
      */
-    //private Long userId;
+    private long id;
+
     /**
      * 用户名
      */
     public String userName;
+
     /**
      * 手机号
      */

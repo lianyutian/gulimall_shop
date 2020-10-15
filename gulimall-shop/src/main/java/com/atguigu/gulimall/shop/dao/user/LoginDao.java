@@ -11,5 +11,11 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface LoginDao {
-    User queryUser(User user);
+    /**
+     * 根据用户名查询用户
+     *
+     * @param userName 用户名
+     * @return 用户信息
+     */
+    User queryUser(String userName);
 }

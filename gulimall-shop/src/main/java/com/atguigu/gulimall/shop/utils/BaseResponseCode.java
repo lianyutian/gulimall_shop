@@ -10,7 +10,7 @@ public enum BaseResponseCode implements ResponseCodeInterface {
     /**
      * 返回操作状态
      */
-    SUCCESS(0, "操作成功")
+    SUCCESS(200, "操作成功")
     ;
 
     /**

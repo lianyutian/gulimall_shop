@@ -107,6 +107,17 @@ public class DataResult<T> {
     }
 
     /**
+     * 操作失败
+     *
+     * @param code 状态码
+     * @param msg 错误信息
+     * @return DataResult
+     */
+    public static <T> DataResult error(int code, String msg) {
+        return new DataResult(code, msg);
+    }
+
+    /**
      * 自定义返回操作
      *
      * @param code 状态码
