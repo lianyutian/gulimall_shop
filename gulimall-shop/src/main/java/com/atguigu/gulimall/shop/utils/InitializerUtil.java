@@ -16,6 +16,6 @@ public class InitializerUtil {
      * @param tokenConfig token配置
      */
     public InitializerUtil(TokenConfig tokenConfig) {
-        JWTUtils.setTokenConfig(tokenConfig);
+        JWTUtil.setTokenConfig(tokenConfig);
     }
 }

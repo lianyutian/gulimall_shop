@@ -21,4 +21,9 @@ public class LoginForm {
      * 用户密码
      */
     private String passWord;
+
+    /**
+     * token
+     */
+    private String accessToken;
 }

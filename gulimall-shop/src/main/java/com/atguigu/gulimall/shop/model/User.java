@@ -17,17 +17,13 @@ public class User {
     /**
      * 用户ID
      */
-    private long id;
+    private String id;
 
     /**
      * 用户名
      */
     public String userName;
 
-    /**
-     * 手机号
-     */
-    //private String mobile;
     /**
      * 密码
      */
@@ -41,5 +37,10 @@ public class User {
     /**
      * token
      */
-    private String token;
+    private String acctssToken;
+
+    /**
+     * 盐值
+     */
+    private String salt;
 }

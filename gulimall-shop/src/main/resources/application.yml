@@ -40,6 +40,21 @@ spring:
       stat-view-servlet:
         login-username: admin
         login-password: 666666
+  # redis配置
+  redis:
+    lettuce:
+      pool:
+        #连接池中最大空闲连接
+        max-idle: 30
+        #连接池中最小空闲连接
+        min-idle: 1
+        #连接池最大连接数
+        max-active: 100
+        #连接池最大阻塞等待时间
+        max-wait: 10000
+    host: 192.168.31.245
+    port: 6379
+    timeout: 10000 # redis链接超时时间
 
 # mybatis配置
 mybatis:
@@ -52,3 +67,9 @@ jwt:
   refreshTokenExpireTime: PT8H
   refreshTokenExpireAppTime: P30D
 
+# 日志配置
+logging:
+  file:
+    path: logs
+  level:
+    com.atguigu.gulimall.shop: debug

@@ -1,19 +1,15 @@
 package com.atguigu.gulimall.shop.utils;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+import javax.xml.bind.DatatypeConverter;
 import java.time.Duration;
-import java.util.Calendar;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -24,7 +20,7 @@ import java.util.Map;
  * @since 2020-10-15
  */
 @Slf4j
-public class JWTUtils {
+public class JWTUtil {
     /**
      * 秘钥
      */
@@ -97,5 +93,68 @@ public class JWTUtils {
      */
     public static DecodedJWT verify(String token) {
         return JWT.require(Algorithm.HMAC256(token)).build().verify(token);
+    }
+
+    /**
+     * 获取用户ID
+     *
+     * @param accessToken token信息
+     * @return 用户ID
+     */
+    public static String getUserId(String accessToken) {
+        String userId = null;
+        try {
+            Claims claims = getClaimsFromToken(accessToken);
+            userId = claims.getSubject();
+        } catch (Exception exception) {
+            log.error(exception.getMessage(), exception);
+        }
+        return userId;
+    }
+
+    /**
+     * 从令牌中获取数据声明
+     *
+     * @param token token
+     * @return Claims
+     */
+    public static Claims getClaimsFromToken(String token) {
+        Claims claims = null;
+        try {
+            claims = Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(SECRETKEY)).parseClaimsJws(token).getBody();
+        } catch (Exception exception) {
+            if (exception instanceof ClaimJwtException) {
+                claims = ((ClaimJwtException) exception).getClaims();
+            }
+        }
+        return claims;
+    }
+
+    /**
+     * 判断token是否过期
+     *
+     * @param token token信息
+     * @return 是否过期
+     */
+    public static Boolean isTokenExpired(String token) {
+        try {
+            Claims claims = getClaimsFromToken(token);
+            Date expiration = claims.getExpiration();
+            return expiration.before(new Date());
+        } catch (Exception exception) {
+            log.error(exception.getMessage(), exception);
+            return true;
+        }
+    }
+
+    /**
+     * 校验令牌
+     *
+     * @param token token信息
+     * @return 是否校验通过
+     */
+    public static boolean validateToken(String token) {
+        Claims claimsFromToken = getClaimsFromToken(token);
+        return (null != claimsFromToken && !isTokenExpired(token));
     }
 }
