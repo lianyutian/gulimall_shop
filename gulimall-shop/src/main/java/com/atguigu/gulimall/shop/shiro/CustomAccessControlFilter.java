@@ -6,10 +6,13 @@ import com.atguigu.gulimall.shop.common.exception.ResponseCode;
 import com.atguigu.gulimall.shop.constants.Constant;
 import com.atguigu.gulimall.shop.utils.BaseResponseCode;
 import com.atguigu.gulimall.shop.utils.DataResult;
+import com.atguigu.gulimall.shop.utils.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletOutputStream;
@@ -70,9 +73,9 @@ public class CustomAccessControlFilter extends AccessControlFilter {
      * @param code 状态码
      * @param msg 响应信息
      */
-    private void customResponse(ServletResponse response, int code, String msg) {
+    private DataResult customResponse(ServletResponse response, int code, String msg) {
         DataResult result = new DataResult(code, msg);
-        //response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
+        response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
         response.setCharacterEncoding("UTF-8");
         String jsonString = JSON.toJSONString(result);
         try {
@@ -82,5 +85,6 @@ public class CustomAccessControlFilter extends AccessControlFilter {
         } catch (IOException exception) {
             log.error("customResponse error:{}", exception);
         }
+        return result;
     }
 }

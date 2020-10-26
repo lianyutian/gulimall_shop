@@ -9,6 +9,7 @@ import com.atguigu.gulimall.shop.service.LoginService;
 import com.atguigu.gulimall.shop.utils.JWTUtil;
 import com.atguigu.gulimall.shop.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 
@@ -16,6 +17,7 @@ import java.util.HashMap;
  * @author lm
  * @since 2020/10/21 23:21
  */
+@Service
 public class LoginServiceImpl implements LoginService {
     /**
      * 登录相关dao

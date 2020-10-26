@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
  * @author lm
  * @since 2020-10-12
  */
-@Service
 public interface LoginService {
     /**
      * 用户登录

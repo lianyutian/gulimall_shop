@@ -34,6 +34,8 @@ public class GuliExceptionHandler {
 	@ExceptionHandler(Exception.class)
 	public DataResult handleException(Exception exception){
 		log.error(exception.getMessage(), exception);
-		return DataResult.error(ResponseCode.UNKNOWN_ERR.getCode(), exception.getMessage());
+		return DataResult.error(ResponseCode.SYSTEM_ERROR.getCode(), exception.getMessage());
 	}
+
+
 }
