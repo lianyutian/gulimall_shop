@@ -5,12 +5,12 @@ import com.atguigu.gulimall.shop.model.User;
 import org.springframework.stereotype.Service;
 
 /**
- * 登录相关service
+ * 用户相关service
  *
  * @author lm
  * @since 2020-10-12
  */
-public interface LoginService {
+public interface UserService {
     /**
      * 用户登录
      *

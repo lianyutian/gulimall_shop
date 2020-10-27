@@ -3,6 +3,8 @@ package com.atguigu.gulimall.shop.config;
 import com.atguigu.gulimall.shop.shiro.CustomAccessControlFilter;
 import com.atguigu.gulimall.shop.shiro.CustomCredentialsMatcher;
 import com.atguigu.gulimall.shop.shiro.CustomRealm;
+import com.atguigu.gulimall.shop.shiro.RedisCacheManager;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -23,6 +25,11 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
+    @Bean
+    public CacheManager cacheManager() {
+        return new RedisCacheManager();
+    }
+
     /**
      * 自定义token匹配器
      * 这里需要添加@Bean将 匹配器交给Spring容器管理
@@ -70,6 +77,9 @@ public class ShiroConfig {
     public Realm getRealm() {
         CustomRealm customRealm = new CustomRealm();
         customRealm.setCredentialsMatcher(customCredentialsMatcher());
+
+        // 开启缓存
+        customRealm.setCacheManager(cacheManager());
         return customRealm;
     }
 

@@ -68,8 +68,10 @@ jwt:
   refreshTokenExpireAppTime: P30D
 
 # 日志配置
+    : debug
 logging:
-  file:
-    path: logs
   level:
-    com.atguigu.gulimall.shop: debug
+    com:
+      atguigu:
+        gulimall:
+          shop: debug

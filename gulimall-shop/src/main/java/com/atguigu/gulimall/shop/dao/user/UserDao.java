@@ -4,13 +4,13 @@ import com.atguigu.gulimall.shop.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * 用户登录dao
+ * 用户dao
  *
  * @author lm
  * @since 2020-10-12
  */
 @Mapper
-public interface LoginDao {
+public interface UserDao {
     /**
      * 根据用户名查询用户
      *

@@ -2,10 +2,10 @@ package com.atguigu.gulimall.shop.service.impl;
 
 import com.atguigu.gulimall.shop.common.exception.GuliException;
 import com.atguigu.gulimall.shop.common.exception.ResponseCode;
-import com.atguigu.gulimall.shop.dao.user.LoginDao;
+import com.atguigu.gulimall.shop.dao.user.UserDao;
 import com.atguigu.gulimall.shop.model.LoginForm;
 import com.atguigu.gulimall.shop.model.User;
-import com.atguigu.gulimall.shop.service.LoginService;
+import com.atguigu.gulimall.shop.service.UserService;
 import com.atguigu.gulimall.shop.utils.JWTUtil;
 import com.atguigu.gulimall.shop.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +18,16 @@ import java.util.HashMap;
  * @since 2020/10/21 23:21
  */
 @Service
-public class LoginServiceImpl implements LoginService {
+public class UserServiceImpl implements UserService {
     /**
      * 登录相关dao
      */
     @Autowired
-    private LoginDao loginDao;
+    private UserDao dao;
 
     @Override
     public String login(LoginForm loginForm) {
-        User user = loginDao.queryUser(loginForm.getUserName());
+        User user = dao.queryUser(loginForm.getUserName());
         if (user == null) {
             throw new GuliException(ResponseCode.USERNAME_OR_PASSWORD_ERR);
         }
