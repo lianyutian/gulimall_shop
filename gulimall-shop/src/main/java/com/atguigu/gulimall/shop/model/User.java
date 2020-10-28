@@ -43,4 +43,9 @@ public class User {
      * 盐值
      */
     private String salt;
+
+    /**
+     * 用户状态
+     */
+    private int status;
 }

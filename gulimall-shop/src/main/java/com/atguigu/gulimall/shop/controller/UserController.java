@@ -2,7 +2,7 @@ package com.atguigu.gulimall.shop.controller;
 
 import com.atguigu.gulimall.shop.model.LoginForm;
 import com.atguigu.gulimall.shop.service.UserService;
-import com.atguigu.gulimall.shop.utils.DataResult;
+import com.atguigu.gulimall.shop.common.DataResult;
 import com.atguigu.gulimall.shop.utils.JWTUtil;
 import com.atguigu.gulimall.shop.utils.RedisUtil;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 /**
- * 登录controller
+ * 用户controller
  *
  * @author lm
  * @since 2020-10-16
@@ -31,10 +31,7 @@ public class UserController {
 
     @PostMapping("/login")
     public DataResult loing(@RequestBody LoginForm loginForm) {
-        userService.login(loginForm);
-        // 生成token
-        String token = JWTUtil.getToken(loginForm.getUserName(), new HashMap<>());
-        return DataResult.success(1);
+        return DataResult.success(userService.login(loginForm));
     }
 
     @PostMapping("/list")

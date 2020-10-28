@@ -1,6 +1,6 @@
 package com.atguigu.gulimall.shop.common.exception;
 
-import com.atguigu.gulimall.shop.utils.DataResult;
+import com.atguigu.gulimall.shop.common.DataResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

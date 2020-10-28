@@ -1,6 +1,7 @@
-package com.atguigu.gulimall.shop.utils;
+package com.atguigu.gulimall.shop.common;
 
-import lombok.Data;
+import com.atguigu.gulimall.shop.utils.BaseResponseCode;
+import com.atguigu.gulimall.shop.utils.ResponseCodeInterface;
 import lombok.Getter;
 import lombok.Setter;
 

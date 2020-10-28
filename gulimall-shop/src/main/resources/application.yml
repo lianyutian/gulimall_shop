@@ -1,5 +1,6 @@
 server:
   port: 8888
+  max-http-header-size: 102400
 spring:
   application:
     name: gulimall-shop
@@ -59,6 +60,7 @@ spring:
 # mybatis配置
 mybatis:
   mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.atguigu.gulimall.shop
 
 # JWT秘钥
 jwt:
@@ -68,7 +70,6 @@ jwt:
   refreshTokenExpireAppTime: P30D
 
 # 日志配置
-    : debug
 logging:
   level:
     com:

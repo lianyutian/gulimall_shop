@@ -1,9 +1,6 @@
 package com.atguigu.gulimall.shop.config;
 
-import com.atguigu.gulimall.shop.shiro.CustomAccessControlFilter;
-import com.atguigu.gulimall.shop.shiro.CustomCredentialsMatcher;
-import com.atguigu.gulimall.shop.shiro.CustomRealm;
-import com.atguigu.gulimall.shop.shiro.RedisCacheManager;
+import com.atguigu.gulimall.shop.shiro.*;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;

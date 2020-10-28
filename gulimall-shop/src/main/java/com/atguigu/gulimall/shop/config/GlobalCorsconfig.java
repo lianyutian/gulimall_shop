@@ -18,10 +18,11 @@ public class GlobalCorsconfig {
     public CorsFilter corsWebFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         // 配置跨域
+        corsConfiguration.setAllowCredentials(true);
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);

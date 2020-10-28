@@ -18,6 +18,7 @@ public enum ResponseCode {
     SYSTEM_ERROR(5000001,"系统异常请稍后再试"),
     TOKEN_ERROR(4010001,"用户未登录，请重新登录"),
     USERNAME_OR_PASSWORD_ERR(-100, "用户名或密码错误"),
+    ACCOUNT_LOCK_TIP(4010012,"该账号被锁定,请联系系统管理员"),
     TOKEN_PAST_DUE(4010002,"token失效,请刷新token"),
     ;
 

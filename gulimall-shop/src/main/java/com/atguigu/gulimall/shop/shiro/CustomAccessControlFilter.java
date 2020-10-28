@@ -4,21 +4,21 @@ import com.alibaba.fastjson.JSON;
 import com.atguigu.gulimall.shop.common.exception.GuliException;
 import com.atguigu.gulimall.shop.common.exception.ResponseCode;
 import com.atguigu.gulimall.shop.constants.Constant;
-import com.atguigu.gulimall.shop.utils.BaseResponseCode;
-import com.atguigu.gulimall.shop.utils.DataResult;
-import com.atguigu.gulimall.shop.utils.RedisUtil;
+import com.atguigu.gulimall.shop.common.DataResult;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.web.filter.AccessControlFilter;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.shiro.web.util.WebUtils;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -29,6 +29,25 @@ import java.io.IOException;
  */
 @Slf4j
 public class CustomAccessControlFilter extends AccessControlFilter {
+    @Override
+    protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        if (httpServletRequest.getMethod().equals(HttpMethod.OPTIONS.name())) {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            // 设置跨域
+            httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+            httpResponse.setHeader("Access-Control-Allow-Headers", "*");
+            httpResponse.setHeader("Access-Control-Allow-Methods", "*");
+            httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+            httpResponse.setHeader("Access-Control-Max-Age", "3600");
+            //防止乱码，适用于传输JSON数据
+            httpResponse.setHeader("Content-Type", "application/json;charset=UTF-8");
+            httpResponse.setStatus(HttpStatus.OK.value());
+            return true;
+        }
+        return super.preHandle(request, response);
+    }
+
     @Override
     protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse, Object o) throws Exception {
         return false;
@@ -55,16 +74,29 @@ public class CustomAccessControlFilter extends AccessControlFilter {
             if (exception.getCause() instanceof GuliException) {
                 GuliException guliException = (GuliException) exception.getCause();
                 customResponse(servletResponse, guliException.getCode(), guliException.getMsg());
+                return false;
             } else {
                 // 认证失败
                 customResponse(servletResponse, ResponseCode.TOKEN_ERROR.getCode(), ResponseCode.TOKEN_ERROR.getMsg());
+                return false;
             }
         } catch (Exception exception) {
             customResponse(servletResponse, ResponseCode.SYSTEM_ERROR.getCode(), ResponseCode.SYSTEM_ERROR.getMsg());
             return false;
         }
-        return false;
+        return true;
     }
+
+//    private void setResponse(ServletRequest request, ServletResponse response) throws IOException {
+//        HttpServletResponse httpResp = WebUtils.toHttp(response);
+//        HttpServletRequest httpReq = WebUtils.toHttp(request);
+//        // 系统重定向会默认把请求头清空，这里通过拦截器重新设置请求头，解决跨域问题
+//        httpResp.addHeader("Access-Control-Allow-Origin", "*");
+//        httpResp.addHeader("Access-Control-Allow-Headers", "*");
+//        httpResp.addHeader("Access-Control-Allow-Methods", "*");
+//        httpResp.addHeader("Access-Control-Allow-Credentials", "true");
+//        this.saveRequestAndRedirectToLogin(request, response);
+//    }
 
     /**
      * 自定义响应前端

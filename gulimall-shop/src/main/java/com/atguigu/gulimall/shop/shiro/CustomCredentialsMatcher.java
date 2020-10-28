@@ -27,8 +27,8 @@ public class CustomCredentialsMatcher extends HashedCredentialsMatcher {
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
         CustomToken customToken = (CustomToken) token;
         String accessToken = (String) customToken.getCredentials();
-        //String userId = JWTUtil.getUserId(accessToken);
-        //log.info("userId: {}", userId);
+        String userId = JWTUtil.getUserId(accessToken);
+        log.info("userId: {}", userId);
         //RedisUtil redisUtil = (RedisUtil) SpringContextUtil.getBean("redisUtil");
         // 判断用户是否退出登录
         if (redisUtil.hasKey(Constant.JWT_ACCESS_TOKEN_BLACKLIST + accessToken)) {

@@ -1,4 +1,4 @@
-package com.atguigu.gulimall.shop.dao.user;
+package com.atguigu.gulimall.shop.dao;
 
 import com.atguigu.gulimall.shop.model.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -17,5 +17,5 @@ public interface UserDao {
      * @param userName 用户名
      * @return 用户信息
      */
-    User queryUser(String userName);
+    User getUserByUserName(String userName);
 }
