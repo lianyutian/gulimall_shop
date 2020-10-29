@@ -15,13 +15,24 @@
         </foreach>
     </select>
 
-    <!-- 根据权限ID获取权限信息 -->
-    <select id="getPermissionsByPermissionIds" resultType="com.atguigu.gulimall.shop.model.SysPermission">
+    <!-- 根据权限ID获取授权信息 -->
+    <select id="getUserPermsByPermissionIds" resultType="java.lang.String">
+        select perms from sys_permission where id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+    <!-- 根据权限ID获取菜单信息 -->
+    <select id="getMenuByPermissionIds" resultType="com.atguigu.gulimall.shop.model.SysPermission">
         select
         id, code, `name`, perms, url, `method`,
         pid, order_num, `type`, `status`, create_time,
         update_time, deleted
-        from sys_permission where id in
+        from sys_permission where
+        deleted = 1
+        and type in (1, 2)
+        and id in
         <foreach collection="list" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>

@@ -5,7 +5,7 @@ import com.atguigu.gulimall.shop.common.exception.ResponseCode;
 import com.atguigu.gulimall.shop.constants.Constant;
 import com.atguigu.gulimall.shop.dao.UserDao;
 import com.atguigu.gulimall.shop.model.LoginForm;
-import com.atguigu.gulimall.shop.model.User;
+import com.atguigu.gulimall.shop.model.SysUser;
 import com.atguigu.gulimall.shop.service.PermissionService;
 import com.atguigu.gulimall.shop.service.RoleService;
 import com.atguigu.gulimall.shop.service.UserService;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String login(LoginForm loginForm) {
-        User user = userDao.getUserByUserName(loginForm.getUserName());
+        SysUser user = userDao.getUserByUserName(loginForm.getUserName());
         if (user == null) {
             throw new GuliException(ResponseCode.USERNAME_OR_PASSWORD_ERR);
         }
@@ -54,12 +54,13 @@ public class UserServiceImpl implements UserService {
         Map<String, Object> claims = new HashMap<>(16);
         // 设置token携带信息
         claims.put(Constant.ROLES_INFOS_KEY, getUserRolesByUserId(user.getId()));
-        claims.put(Constant.PERMISSIONS_INFOS_KEY, getUserPermissionsByUserId(user.getId()));
+        claims.put(Constant.PERMISSIONS_INFOS_KEY, getUserPermsByUserId(user.getId()));
         return JWTUtil.getToken(user.getId(), claims);
     }
 
     /**
      * 根据用户ID查询用户角色信息
+     *
      *
      * @param userId 用户ID
      * @return 角色集合
@@ -74,7 +75,7 @@ public class UserServiceImpl implements UserService {
      * @param userId 用户ID
      * @return 权限集合
      */
-    private List<String> getUserPermissionsByUserId(String userId) {
-        return permissionService.getUserPermissionsByUserId(userId);
+    private List<String> getUserPermsByUserId(String userId) {
+        return permissionService.getUserPermsByUserId(userId);
     }
 }

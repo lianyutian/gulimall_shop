@@ -1,5 +1,6 @@
 package com.atguigu.gulimall.shop.dao;
 
+import com.atguigu.gulimall.shop.model.SysPermission;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -34,5 +35,13 @@ public interface PermissionDao {
      * @param permissionIds 权限ID
      * @return 权限信息
      */
-    List<String> getPermissionsByPermissionIds(List<String> permissionIds);
+    List<String> getUserPermsByPermissionIds(List<String> permissionIds);
+
+    /**
+     * 根据权限ID获取权限菜单
+     *
+     * @param permissionIds 权限ID
+     * @return 权限菜单
+     */
+    List<SysPermission> getMenuByPermissionIds(List<String> permissionIds);
 }

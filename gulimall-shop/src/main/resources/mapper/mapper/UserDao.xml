@@ -3,7 +3,7 @@
 
 <mapper namespace="com.atguigu.gulimall.shop.dao.UserDao">
     <!-- 根据用户名查询用户 -->
-    <select id="getUserByUserName" resultType="com.atguigu.gulimall.shop.model.User">
+    <select id="getUserByUserName" resultType="com.atguigu.gulimall.shop.model.SysUser">
         select id,userName,passWord,salt,status from sys_user where username = #{userName}
     </select>
 </mapper>

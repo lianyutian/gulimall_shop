@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 系统权限模型
@@ -18,7 +19,7 @@ import java.util.Date;
 @Getter
 public class SysPermission implements Serializable {
     /**
-     * 权限ID
+     * 菜单权限ID
      */
     private String id;
 
@@ -86,4 +87,19 @@ public class SysPermission implements Serializable {
      * 父级菜单权限名称
      */
     private String pidName;
+
+    /**
+     * 菜单子集集合
+     */
+    private List<?> children;
+
+    /**
+     * 菜单默认展开
+     */
+    private boolean spread=true;
+
+    /**
+     * 节点是否选中
+     */
+    private boolean checked;
 }

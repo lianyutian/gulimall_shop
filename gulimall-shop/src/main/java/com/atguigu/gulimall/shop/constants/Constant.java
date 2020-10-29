@@ -1,5 +1,8 @@
 package com.atguigu.gulimall.shop.constants;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 自定义静态常量类
  *
@@ -76,4 +79,27 @@ public class Constant {
      * 获取上传的文件类型key
      */
     public static final String FILE_TYPE = "file-type_";
+
+
+    public enum MenuType {
+        /**
+         * 目录
+         */
+        CATALOG(1),
+        /**
+         * 菜单
+         */
+        MENU(2),
+        /**
+         * 按钮
+         */
+        BUTTON(3);
+
+        @Getter
+        private int value;
+
+        MenuType(int value) {
+            this.value = value;
+        }
+    }
 }

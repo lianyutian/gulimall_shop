@@ -1,8 +1,6 @@
 package com.atguigu.gulimall.shop.service;
 
 import com.atguigu.gulimall.shop.model.LoginForm;
-import com.atguigu.gulimall.shop.model.User;
-import org.springframework.stereotype.Service;
 
 /**
  * 用户相关service

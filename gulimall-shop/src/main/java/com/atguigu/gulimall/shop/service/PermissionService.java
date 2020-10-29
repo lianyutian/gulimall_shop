@@ -1,6 +1,6 @@
 package com.atguigu.gulimall.shop.service;
 
-import org.apache.ibatis.annotations.Mapper;
+import com.atguigu.gulimall.shop.model.SysPermission;
 
 import java.util.List;
 
@@ -12,10 +12,27 @@ import java.util.List;
  */
 public interface PermissionService {
     /**
+     * 根据用户ID获取用户权限ID
+     *
+     * @param userId 用户ID
+     * @return 权限ID
+     */
+    List<String> getPermissionIds(String userId);
+
+
+    /**
      * 根据用户ID获取权限
      *
      * @param id 用户ID
      * @return 权限集合
      */
-    List<String> getUserPermissionsByUserId(String id);
+    List<String> getUserPermsByUserId(String id);
+
+    /**
+     * 根据用户ID获取用户菜单
+     *
+     * @param userId 用户ID
+     * @return 菜单项
+     */
+    List<SysPermission> getMenuByUserId(String userId);
 }

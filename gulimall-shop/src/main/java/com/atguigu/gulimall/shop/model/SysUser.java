@@ -13,7 +13,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
-public class User {
+public class SysUser {
     /**
      * 用户ID
      */

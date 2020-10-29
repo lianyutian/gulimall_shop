@@ -1,6 +1,7 @@
 package com.atguigu.gulimall.shop.service.impl;
 
 import com.atguigu.gulimall.shop.dao.PermissionDao;
+import com.atguigu.gulimall.shop.model.SysPermission;
 import com.atguigu.gulimall.shop.service.PermissionService;
 import com.atguigu.gulimall.shop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,29 @@ public class PermissionServiceImpl implements PermissionService {
     private RoleService roleService;
 
     @Override
-    public List<String> getUserPermissionsByUserId(String userId) {
+    public List<String> getPermissionIds(String userId) {
         List<String> roleIds = roleService.getRoleIdsByUserId(userId);
         if (CollectionUtils.isEmpty(roleIds)) {
             return null;
         }
-        List<String> permissionIds = permissionDao.getPermissionIdsByRoleIds(roleIds);
+        return permissionDao.getPermissionIdsByRoleIds(roleIds);
+    }
+
+    @Override
+    public List<String> getUserPermsByUserId(String userId) {
+        List<String> permissionIds = getPermissionIds(userId);
         if (CollectionUtils.isEmpty(permissionIds)) {
             return null;
         }
-        return permissionDao.getPermissionsByPermissionIds(permissionIds);
+        return permissionDao.getUserPermsByPermissionIds(permissionIds);
+    }
+
+    @Override
+    public List<SysPermission> getMenuByUserId(String userId) {
+        List<String> permissionIds = getPermissionIds(userId);
+        if (CollectionUtils.isEmpty(permissionIds)) {
+            return null;
+        }
+        return permissionDao.getMenuByPermissionIds(permissionIds);
     }
 }
