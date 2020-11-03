@@ -35,4 +35,11 @@ public interface PermissionService {
      * @return 菜单项
      */
     List<SysPermission> getMenuByUserId(String userId);
+
+    /**
+     * 获取用户权限树
+     *
+     * @return 用户权限信息
+     */
+    List<SysPermission> getPermissionTree();
 }

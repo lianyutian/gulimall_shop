@@ -37,4 +37,17 @@
             #{item}
         </foreach>
     </select>
+
+    <!-- 获取权限信息 -->
+    <select id="getPermissions" resultType="com.atguigu.gulimall.shop.model.SysPermission">
+        select
+        id, code, `name`, perms, url, `method`,
+        pid, order_num orderNum, `type`, `status`, create_time createTime,
+        update_time updateTime, deleted
+        from sys_permission where
+        id in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 </mapper>

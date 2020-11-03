@@ -44,4 +44,12 @@ public interface PermissionDao {
      * @return 权限菜单
      */
     List<SysPermission> getMenuByPermissionIds(List<String> permissionIds);
+
+    /**
+     * 获取权限
+     *
+     * @param permissionIds 权限ID
+     * @return 权限信息
+     */
+    List<SysPermission> getPermissions(List<String> permissionIds);
 }
