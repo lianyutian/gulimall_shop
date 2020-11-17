@@ -1,5 +1,7 @@
 package com.atguigu.gulimall.shop.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.atguigu.gulimall.shop.constants.Constant;
 import com.atguigu.gulimall.shop.dao.PermissionDao;
 import com.atguigu.gulimall.shop.model.SysPermission;
@@ -7,14 +9,12 @@ import com.atguigu.gulimall.shop.service.PermissionService;
 import com.atguigu.gulimall.shop.service.RoleService;
 import com.atguigu.gulimall.shop.utils.JWTUtil;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -57,23 +57,101 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<SysPermission> getPermissionTree() {
-        // 获取当前用户ID
-        String token = (String) SecurityUtils.getSubject().getPrincipal();
-        String userId = JWTUtil.getUserId(token);
-        List<SysPermission> permissions = getPermissions(userId);
-        if (CollectionUtils.isEmpty(permissions)) {
-            return Collections.emptyList();
-        }
-        return getPermissions(permissions);
+    public List<SysPermission> getAllPermission() {
+        return getPermissionTree(permissionDao.getAllPermission(), false);
     }
 
-    private List<SysPermission> getPermissions(List<SysPermission> permissions){
+    /**
+     * 获取权限树
+     *
+     * @return 权限树
+     */
+    private List<SysPermission> getPermissionTree(List<SysPermission> sysPermissionList, boolean isMenu) {
+        if (CollectionUtils.isEmpty(sysPermissionList)) {
+            return Collections.emptyList();
+        }
         List<SysPermission> permissionTree = new ArrayList<>();
-        for(SysPermission permission : permissions){
+        sysPermissionList.forEach(permission -> {
+            // 判断是否目录
+            if (permission.getType().equals(Constant.MenuType.CATALOG.getValue())) {
+                SysPermission sysPermission = new SysPermission();
+                BeanUtils.copyProperties(permission, sysPermission);
+                if (isMenu) {
+                    sysPermission.setChildren(getChildMenu(permission.getId(), sysPermissionList));
+                } else {
+                    sysPermission.setChildren(getChild(permission.getId(), sysPermissionList));
+                }
+                permissionTree.add(sysPermission);
+            }
+        });
+        return permissionTree;
+    }
+
+    /**
+     * 获取子权限（不包含按钮）
+     *
+     * @param id 父菜单权限id
+     * @param sysPermissionList 所有菜单权限
+     * @return 子权限
+     */
+    private List<SysPermission> getChildMenu(String id, List<SysPermission> sysPermissionList) {
+        List<SysPermission> childMenuList = new ArrayList<>();
+        sysPermissionList.stream().filter(permission -> permission.getPid().equals(id) && permission.getType() != Constant.MenuType.BUTTON.getValue()).forEach(permission -> {
+            SysPermission sysPermission = new SysPermission();
+            BeanUtils.copyProperties(permission, sysPermission);
+            sysPermission.setChildren(getChildMenu(permission.getId(), sysPermissionList));
+            childMenuList.add(sysPermission);
+        });
+        return childMenuList;
+    }
+
+    /**
+     * 获取子权限
+     *
+     * @param id 父菜单权限id
+     * @param sysPermissionList 所有菜单权限
+     * @return 子权限
+     */
+    private List<SysPermission> getChild(String id, List<SysPermission> sysPermissionList) {
+        List<SysPermission> childList = new ArrayList<>();
+        sysPermissionList.stream().filter(permission -> permission.getPid().equals(id)).forEach(permission -> {
+            SysPermission sysPermission = new SysPermission();
+            BeanUtils.copyProperties(permission, sysPermission);
+            sysPermission.setChildren(getChild(permission.getId(), sysPermissionList));
+            childList.add(sysPermission);
+        });
+        return childList;
+    }
+
+    @Override
+    public List<SysPermission> getPermissionMenuTree() {
+        return getPermissionTree(permissionDao.getAllPermission(), true);
+    }
+
+
+    @Override
+    public void addPermission(String params) {
+        SysPermission sysPermission = JSON.parseObject(params, new TypeReference<SysPermission>() {
+        });
+        sysPermission.setId(UUID.randomUUID().toString());
+        sysPermission.setCreateTime(new Date());
+        permissionDao.addPermission(sysPermission);
+        // 更新用户权限
+
+
+    }
+
+    private String getUserId() {
+        String token = (String) SecurityUtils.getSubject().getPrincipal();
+        return JWTUtil.getUserId(token);
+    }
+
+    private List<SysPermission> getPermissions(List<SysPermission> permissions) {
+        List<SysPermission> permissionTree = new ArrayList<>();
+        for (SysPermission permission : permissions) {
             permission.setChildren(getSubMenuList(permission.getId(), permissions));
             // 目录
-            if(permission.getType() == Constant.MenuType.CATALOG.getValue()){
+            if (permission.getType() == Constant.MenuType.CATALOG.getValue()) {
                 permissionTree.add(permission);
             }
         }
@@ -83,7 +161,7 @@ public class PermissionServiceImpl implements PermissionService {
     /**
      * 二级菜单
      *
-     * @param id 根菜单ID
+     * @param id       根菜单ID
      * @param menuList 用户菜单项
      * @return 二级菜单
      */

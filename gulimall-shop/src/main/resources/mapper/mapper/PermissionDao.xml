@@ -50,4 +50,20 @@
             #{item}
         </foreach>
     </select>
+
+    <!-- 添加权限 -->
+    <select id="addPermission" parameterType="com.atguigu.gulimall.shop.model.SysPermission">
+        insert into sys_permission(id, name, type, pid, order_num, status) values(#{id}, #{name}, #{type}, #{pid}, #{orderNum}, #{status})
+    </select>
+
+    <!-- 获取所有菜单权限-->
+    <select id="getAllPermission" resultType="com.atguigu.gulimall.shop.model.SysPermission">
+        select
+        id, code, `name`, perms, url, `method`,
+        pid, order_num, `type`, `status`, create_time,
+        update_time, deleted
+        from sys_permission
+        where
+        deleted = 1 order by order_num desc
+    </select>
 </mapper>

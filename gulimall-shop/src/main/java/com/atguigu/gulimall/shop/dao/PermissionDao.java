@@ -52,4 +52,18 @@ public interface PermissionDao {
      * @return 权限信息
      */
     List<SysPermission> getPermissions(List<String> permissionIds);
+
+    /**
+     * 添加权限
+     *
+     * @param sysPermission 权限信息
+     */
+    void addPermission(SysPermission sysPermission);
+
+    /**
+     * 获取所有菜单权限
+     *
+     * @return 菜单权限
+     */
+    List<SysPermission> getAllPermission();
 }

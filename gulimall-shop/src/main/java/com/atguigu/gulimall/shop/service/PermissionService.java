@@ -37,9 +37,23 @@ public interface PermissionService {
     List<SysPermission> getMenuByUserId(String userId);
 
     /**
-     * 获取用户权限树
+     * 获取所有菜单权限
      *
-     * @return 用户权限信息
+     * @return 菜单权限
      */
-    List<SysPermission> getPermissionTree();
+    List<SysPermission> getAllPermission();
+
+    /**
+     * 添加权限
+     *
+     * @param params 权限
+     */
+    void addPermission(String params);
+
+    /**
+     * 获取菜单权限树
+     *
+     * @return 菜单树
+     */
+    List<SysPermission> getPermissionMenuTree();
 }
