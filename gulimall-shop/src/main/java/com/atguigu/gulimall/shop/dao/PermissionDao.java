@@ -58,7 +58,7 @@ public interface PermissionDao {
      *
      * @param sysPermission 权限信息
      */
-    void addPermission(SysPermission sysPermission);
+    int addPermission(SysPermission sysPermission);
 
     /**
      * 获取所有菜单权限

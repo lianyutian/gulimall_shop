@@ -76,3 +76,7 @@ logging:
       atguigu:
         gulimall:
           shop: debug
+# 分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true

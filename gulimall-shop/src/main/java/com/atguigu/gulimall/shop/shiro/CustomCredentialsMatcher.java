@@ -25,19 +25,19 @@ public class CustomCredentialsMatcher extends HashedCredentialsMatcher {
     private RedisUtil redisUtil;
     @Override
     public boolean doCredentialsMatch(AuthenticationToken token, AuthenticationInfo info) {
-        CustomToken customToken = (CustomToken) token;
-        String accessToken = (String) customToken.getCredentials();
-        String userId = JWTUtil.getUserId(accessToken);
-        log.info("userId: {}", userId);
-        //RedisUtil redisUtil = (RedisUtil) SpringContextUtil.getBean("redisUtil");
-        // 判断用户是否退出登录
-        if (redisUtil.hasKey(Constant.JWT_ACCESS_TOKEN_BLACKLIST + accessToken)) {
-            throw new GuliException(ResponseCode.TOKEN_ERROR);
-        }
-        // 校验token（是否过期/token中数据为空)
-        if (!JWTUtil.validateToken(accessToken)) {
-            throw new GuliException(ResponseCode.TOKEN_PAST_DUE);
-        }
+//        CustomToken customToken = (CustomToken) token;
+//        String accessToken = (String) customToken.getCredentials();
+//        String userId = JWTUtil.getUserId(accessToken);
+//        log.info("userId: {}", userId);
+//        //RedisUtil redisUtil = (RedisUtil) SpringContextUtil.getBean("redisUtil");
+//        // 判断用户是否退出登录
+//        if (redisUtil.hasKey(Constant.JWT_ACCESS_TOKEN_BLACKLIST + accessToken)) {
+//            throw new GuliException(ResponseCode.TOKEN_ERROR);
+//        }
+//        // 校验token（是否过期/token中数据为空)
+//        if (!JWTUtil.validateToken(accessToken)) {
+//            throw new GuliException(ResponseCode.TOKEN_PAST_DUE);
+//        }
         return true;
     }
 }

@@ -1,5 +1,7 @@
 package com.atguigu.gulimall.shop.dao;
 
+import com.atguigu.gulimall.shop.model.RoleReqForm;
+import com.atguigu.gulimall.shop.model.SysRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -34,4 +36,12 @@ public interface RoleDao {
      * @return
      */
     List<String> getRolesByRoleIds(List<String> rolesId);
+
+    /**
+     * 获取角色列表
+     *
+     * @param roleReqForm 查询条件
+     * @return 角色列表
+     */
+    List<SysRole> getRoleList(RoleReqForm roleReqForm);
 }

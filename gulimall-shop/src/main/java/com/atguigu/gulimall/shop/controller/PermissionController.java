@@ -1,6 +1,7 @@
 package com.atguigu.gulimall.shop.controller;
 
 import com.atguigu.gulimall.shop.common.DataResult;
+import com.atguigu.gulimall.shop.model.SelectMenuModel;
 import com.atguigu.gulimall.shop.model.SysPermission;
 import com.atguigu.gulimall.shop.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,14 +36,19 @@ public class PermissionController {
      *
      * @return 菜单树
      */
-    @GetMapping("/getPermissionMenuTree")
-    public DataResult<List<SysPermission>> getPermissionMenuTree() {
-        return DataResult.success(permissionService.getPermissionMenuTree());
+    @GetMapping("/getSelectMenuTree")
+    public DataResult<List<SelectMenuModel>> getSelectMenuTree() {
+        return DataResult.success(permissionService.getSelectMenuTree());
     }
 
+    /**
+     * 添加菜单权限
+     *
+     * @param params 参数
+     * @return
+     */
     @PostMapping("/addPermission")
     public DataResult addPermission(@RequestBody String params) {
-        permissionService.addPermission(params);
-        return DataResult.success();
+        return DataResult.success(permissionService.addPermission(params));
     }
 }

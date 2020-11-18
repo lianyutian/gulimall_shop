@@ -1,6 +1,7 @@
 package com.atguigu.gulimall.shop.service.impl;
 
 import com.atguigu.gulimall.shop.constants.Constant;
+import com.atguigu.gulimall.shop.model.SelectMenuModel;
 import com.atguigu.gulimall.shop.model.SysPermission;
 import com.atguigu.gulimall.shop.service.MenuService;
 import com.atguigu.gulimall.shop.service.PermissionService;
@@ -32,6 +33,19 @@ public class MenuServiceImpl implements MenuService {
         // 根据用户ID获取用户对应菜单项
         List<SysPermission> permissionMenus = permissionService.getMenuByUserId(userId);
         return getMenuTreeList(permissionMenus);
+    }
+
+    @Override
+    public List<SelectMenuModel> getMenus() {
+        List<SysPermission> menuList = getMenuList();
+        List<SelectMenuModel> list = new ArrayList<>();
+        menuList.forEach(menu -> {
+            SelectMenuModel menuModel = new SelectMenuModel();
+            menuModel.setId(menu.getId());
+            menuModel.setLabel(menu.getName());
+            list.add(menuModel);
+        });
+        return list;
     }
 
     private List<SysPermission> getMenuTreeList(List<SysPermission> menuList){

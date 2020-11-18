@@ -27,4 +27,14 @@ public class MenuController {
     public DataResult getMenuList() {
         return DataResult.success(menuService.getMenuList());
     }
+
+    /**
+     * 获取菜单
+     *
+     * @return
+     */
+    @GetMapping("/getMenus")
+    public DataResult getMenus() {
+        return DataResult.success(menuService.getMenus());
+    }
 }

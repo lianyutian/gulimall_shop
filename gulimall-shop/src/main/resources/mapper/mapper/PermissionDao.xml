@@ -52,8 +52,9 @@
     </select>
 
     <!-- 添加权限 -->
-    <select id="addPermission" parameterType="com.atguigu.gulimall.shop.model.SysPermission">
-        insert into sys_permission(id, name, type, pid, order_num, status) values(#{id}, #{name}, #{type}, #{pid}, #{orderNum}, #{status})
+    <select id="addPermission" parameterType="com.atguigu.gulimall.shop.model.SysPermission" resultType="java.lang.Integer">
+        insert into sys_permission(id, name, type, pid, order_num, status)
+        values(#{id}, #{name}, #{type}, #{pid}, #{orderNum}, #{status})
     </select>
 
     <!-- 获取所有菜单权限-->

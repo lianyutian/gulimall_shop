@@ -1,5 +1,8 @@
 package com.atguigu.gulimall.shop.service;
 
+import com.atguigu.gulimall.shop.model.RoleReqForm;
+import com.atguigu.gulimall.shop.model.SysRole;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -26,4 +29,12 @@ public interface RoleService {
      * @return 角色ID
      */
     List<String> getRoleIdsByUserId(String userId);
+
+    /**
+     * 获取角色列表
+     *
+     * @param roleReqForm 查询条件
+     * @return 角色列表
+     */
+    PageInfo getRoleList(RoleReqForm roleReqForm);
 }
