@@ -2,15 +2,9 @@ package com.atguigu.gulimall.shop.controller;
 
 import com.atguigu.gulimall.shop.common.DataResult;
 import com.atguigu.gulimall.shop.model.RoleReqForm;
-import com.atguigu.gulimall.shop.model.SysRole;
 import com.atguigu.gulimall.shop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.xml.crypto.Data;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 角色管理
@@ -24,7 +18,7 @@ public class RoleController {
     @Autowired
     RoleService roleService;
     /**
-     * 获取角色列表
+     * 获取条件查询角色列表
      *
      * @return 角色
      */

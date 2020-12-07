@@ -1,9 +1,7 @@
 package com.atguigu.gulimall.shop.service;
 
+import com.atguigu.gulimall.shop.model.PageInfo;
 import com.atguigu.gulimall.shop.model.RoleReqForm;
-import com.atguigu.gulimall.shop.model.SysRole;
-import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 

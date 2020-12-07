@@ -33,7 +33,7 @@ public class SysRole {
     /**
      * 角色状态
      */
-    private Integer status;
+    private boolean status;
 
     /**
      * 创建时间
@@ -48,7 +48,7 @@ public class SysRole {
     /**
      * 是否删除
      */
-    private Integer deleted;
+    private boolean deleted;
 
     /**
      * 角色关联的系统权限
