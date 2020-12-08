@@ -1,5 +1,6 @@
 package com.atguigu.gulimall.shop.dao;
 
+import com.atguigu.gulimall.shop.model.SysRolePermission;
 import com.atguigu.gulimall.shop.model.RoleReqForm;
 import com.atguigu.gulimall.shop.model.SysRole;
 import org.apache.ibatis.annotations.Mapper;
@@ -44,4 +45,8 @@ public interface RoleDao {
      * @return 角色列表
      */
     List<SysRole> getRoleList(RoleReqForm roleReqForm);
+
+    Integer addRole(SysRole sysRole);
+
+    void addRolePermissions(List<SysRolePermission> rolePermissionList);
 }

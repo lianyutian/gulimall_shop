@@ -22,9 +22,9 @@ public class RoleReqForm {
     @ApiModelProperty(value = "角色名称")
     private String roleName;
     @ApiModelProperty(value = "角色状态")
-    private Integer status;
+    private Boolean status;
     @ApiModelProperty(value = "开始时间")
-    private String startTime;
+    private String createTime;
     @ApiModelProperty(value = "结束时间")
     private String endTime;
 }

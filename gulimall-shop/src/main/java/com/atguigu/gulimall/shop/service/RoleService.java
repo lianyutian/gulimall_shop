@@ -2,6 +2,7 @@ package com.atguigu.gulimall.shop.service;
 
 import com.atguigu.gulimall.shop.model.PageInfo;
 import com.atguigu.gulimall.shop.model.RoleReqForm;
+import com.atguigu.gulimall.shop.model.SysRole;
 
 import java.util.List;
 
@@ -35,4 +36,6 @@ public interface RoleService {
      * @return 角色列表
      */
     PageInfo getRoleList(RoleReqForm roleReqForm);
+
+    Integer addRole(SysRole sysRole);
 }

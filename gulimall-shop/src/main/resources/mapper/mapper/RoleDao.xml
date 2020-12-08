@@ -39,11 +39,29 @@
         <if test="status != null and status != '' or status == 0">
             and status = #{status}
         </if>
-        <if test="startTime != null and startTime != ''">
-            and create_time &gt;= #{startTime}
+        <if test="createTime != null and createTime != ''">
+            and create_time &gt;= #{createTime}
         </if>
         <if test="endTime != null and endTime != ''">
             and create_time &lt;= #{endTime}
         </if>
     </select>
+
+    <insert id="addRole" parameterType="com.atguigu.gulimall.shop.model.SysRole">
+        insert into sys_role(id, `name`, description, `status`, create_time, deleted)
+        values (#{id}, #{name}, #{description}, #{status}, #{createTime}, #{deleted})
+    </insert>
+
+    <insert id="addRolePermissions" parameterType="com.atguigu.gulimall.shop.model.SysRolePermission">
+        insert into sys_role_permission(id, role_id, permission_id, create_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+              #{item.id},
+              #{item.roleId},
+              #{item.permissionId},
+              #{item.createTime}
+            )
+        </foreach>
+    </insert>
 </mapper>

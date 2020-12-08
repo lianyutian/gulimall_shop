@@ -53,5 +53,5 @@ public class SysRole {
     /**
      * 角色关联的系统权限
      */
-    private List<SysPermission> permissionList;
+    private List<String> permissions;
 }
