@@ -1,7 +1,6 @@
 package com.atguigu.gulimall.shop.constants;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 自定义静态常量类
@@ -81,7 +80,7 @@ public class Constant {
     public static final String FILE_TYPE = "file-type_";
 
 
-    public enum MenuType {
+    public enum Type {
         /**
          * 目录
          */
@@ -93,12 +92,16 @@ public class Constant {
         /**
          * 按钮
          */
-        BUTTON(3);
+        BUTTON(3),
+        /**
+         * 总部
+         */
+        HEAD_DEPT(0);
 
         @Getter
         private int value;
 
-        MenuType(int value) {
+        Type(int value) {
             this.value = value;
         }
     }

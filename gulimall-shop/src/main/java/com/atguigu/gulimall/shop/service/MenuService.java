@@ -1,10 +1,9 @@
 package com.atguigu.gulimall.shop.service;
 
-import com.atguigu.gulimall.shop.model.SelectMenuModel;
+import com.atguigu.gulimall.shop.model.TreeModel;
 import com.atguigu.gulimall.shop.model.SysPermission;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * 用户菜单接口
@@ -20,5 +19,5 @@ public interface MenuService {
      */
     List<SysPermission> getMenuList();
 
-    List<SelectMenuModel> getMenus();
+    List<TreeModel> getMenus();
 }

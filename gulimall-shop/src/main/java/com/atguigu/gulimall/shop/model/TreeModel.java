@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Setter
 @Getter
-public class SelectMenuModel {
+public class TreeModel {
     /**
      * 菜单id
      */
@@ -26,5 +26,5 @@ public class SelectMenuModel {
     /**
      * 子菜单
      */
-    private List<SelectMenuModel> children;
+    private List<?> children;
 }

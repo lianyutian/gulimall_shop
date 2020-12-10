@@ -1,7 +1,7 @@
 package com.atguigu.gulimall.shop.controller;
 
 import com.atguigu.gulimall.shop.common.DataResult;
-import com.atguigu.gulimall.shop.model.SelectMenuModel;
+import com.atguigu.gulimall.shop.model.TreeModel;
 import com.atguigu.gulimall.shop.model.SysPermission;
 import com.atguigu.gulimall.shop.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,7 @@ public class PermissionController {
      * @return 菜单树
      */
     @GetMapping("/getSelectMenuTree")
-    public DataResult<List<SelectMenuModel>> getSelectMenuTree() {
+    public DataResult<List<TreeModel>> getSelectMenuTree() {
         return DataResult.success(permissionService.getSelectMenuTree());
     }
 

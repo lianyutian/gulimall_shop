@@ -1,6 +1,6 @@
 package com.atguigu.gulimall.shop.service;
 
-import com.atguigu.gulimall.shop.model.SelectMenuModel;
+import com.atguigu.gulimall.shop.model.TreeModel;
 import com.atguigu.gulimall.shop.model.SysPermission;
 
 import java.util.List;
@@ -56,5 +56,5 @@ public interface PermissionService {
      *
      * @return 菜单树
      */
-    List<SelectMenuModel> getSelectMenuTree();
+    List<TreeModel> getSelectMenuTree();
 }

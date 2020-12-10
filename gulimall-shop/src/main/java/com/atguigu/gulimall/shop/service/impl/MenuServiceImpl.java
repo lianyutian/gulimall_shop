@@ -1,7 +1,7 @@
 package com.atguigu.gulimall.shop.service.impl;
 
 import com.atguigu.gulimall.shop.constants.Constant;
-import com.atguigu.gulimall.shop.model.SelectMenuModel;
+import com.atguigu.gulimall.shop.model.TreeModel;
 import com.atguigu.gulimall.shop.model.SysPermission;
 import com.atguigu.gulimall.shop.service.MenuService;
 import com.atguigu.gulimall.shop.service.PermissionService;
@@ -36,11 +36,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<SelectMenuModel> getMenus() {
+    public List<TreeModel> getMenus() {
         List<SysPermission> menuList = getMenuList();
-        List<SelectMenuModel> list = new ArrayList<>();
+        List<TreeModel> list = new ArrayList<>();
         menuList.forEach(menu -> {
-            SelectMenuModel menuModel = new SelectMenuModel();
+            TreeModel menuModel = new TreeModel();
             menuModel.setId(menu.getId());
             menuModel.setLabel(menu.getName());
             list.add(menuModel);
@@ -52,7 +52,7 @@ public class MenuServiceImpl implements MenuService {
         List<SysPermission> subMenuList = new ArrayList<>();
         for(SysPermission menu : menuList){
             // 目录
-            if(menu.getType() == Constant.MenuType.CATALOG.getValue()){
+            if(menu.getType() == Constant.Type.CATALOG.getValue()){
                 menu.setChildren(getSubMenuList(menu.getId(), menuList));
                 subMenuList.add(menu);
             }
